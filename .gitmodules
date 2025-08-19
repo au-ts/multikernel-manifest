@@ -1,0 +1,8 @@
+[submodule "microkit"]
+	path = microkit
+	url = git@github.com:au-ts/microkit.git
+	branch = multikernel
+[submodule "seL4"]
+	path = seL4
+	url = git@github.com:au-ts/seL4.git
+	branch = multikernel
