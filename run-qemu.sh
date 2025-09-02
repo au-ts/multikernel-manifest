@@ -6,7 +6,7 @@ export PATH=$PATH:$HOME/code/ts/machine_queue
 
 cd microkit
 
-python3 build_sdk.py --sel4="../seL4" --boards qemu_virt_aarch64_multikernel --configs debug --skip-docs --skip-tar
+python3 build_sdk.py --sel4="../seL4" --boards qemu_virt_aarch64_multikernel --configs debug --skip-docs --skip-tar --skip-tool
 python3 dev_build.py --rebuild --example hello --board qemu_virt_aarch64_multikernel
 
 qemu-system-aarch64 \
