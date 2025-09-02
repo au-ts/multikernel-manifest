@@ -11,8 +11,10 @@ python3 dev_build.py --rebuild --example hello --board qemu_virt_aarch64_multike
 
 qemu-system-aarch64 \
   -machine virt,virtualization=on \
+  -smp 4 \
   -cpu cortex-a53 \
   -nographic \
   -serial mon:stdio \
   -device loader,file=./tmp_build/loader.img,addr=0x70000000,cpu-num=0 \
+  -d guest_errors \
   -m size=2G "$@"
