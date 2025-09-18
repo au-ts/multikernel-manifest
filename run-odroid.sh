@@ -2,8 +2,6 @@
 
 set -euo pipefail
 
-export PATH=$PATH:$HOME/code/ts/machine_queue
-
 cd microkit
 
 python3 build_sdk.py --sel4="../seL4" --boards odroidc4_multikernel --configs debug --skip-docs --skip-tar --skip-tool
