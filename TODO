@@ -1,2 +1,10 @@
 - need a way to ensure that only one kernel can modify GIC registers (for setting target IDs, basically)
-- 
+  -> at the moment we just hardcode init_irqs() to only initialise only core 1...
+
+- shared memory currently makes copy of all the buffers on every core 
+  and so isn't shared
+  only create the buffers necessary on each
+
+- timer sddf example broken? null caps?
+
+- zero out memory before using it
