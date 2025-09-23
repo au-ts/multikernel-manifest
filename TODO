@@ -1,0 +1,2 @@
+- need a way to ensure that only one kernel can modify GIC registers (for setting target IDs, basically)
+- 
