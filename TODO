@@ -11,3 +11,10 @@
 - need to make the size of the allocations not fixed
 
 - code cleanup needs to be done and lots of debug prints happen.
+
+- need to reserve memory of other kernels for every kernel
+  (and other kernel's normal memory)
+
+- decide what RAM each kernel uses outside of built_system, instead of inside it
+
+- crashes when endpoints cross-core

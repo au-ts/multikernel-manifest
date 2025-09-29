@@ -529,3 +529,35 @@ $ ./run-odroid.sh
 ## To-Do
 
 See the [TODO](./TODO) file.
+
+
+## seL4 Changes
+
+1.  The kernel uses a fixed virtual memory address on AArch64, rather than
+    an address based on the physical memory used that is located within the
+    kernel physical memory ("direct mapping") window.
+
+2.  The GIC is no longer initialised in the kernel; it is assumed initialised
+    by the loader.
+
+3.  The kernel boot protocol has changed so that reserved regions, physical memory (RAM),
+    the root task regions, and the kernel physical region are passed via a
+    "Kernel BootInfo" page by the loader, instead of a mix of generated-at-compile-time
+    and passed in registers.
+
+
+## microkit changes
+
+-   The tool learns about a new parameter, "cpu", to the protection domain
+    that tells it what CPU to place a protection domain on.
+
+-   Previously, we used implicit indices in the array of protection domains,
+    but since the system is built once per-core then the indices change between
+    each build. The tool has been rewritten to address PDs by their name
+    (which is unique) as opposed their index.
+
+-   Shared information, such as which SGIs, and what physical addresses for
+    shared memory are chosen quite arbitrarily before any systems are built.
+
+-   The tool now picks arbitrary physical addresses for each kernel to run in
+    at a spacing of 0x1000000 (kernel_elf_size_align).
