@@ -3,6 +3,11 @@
 This is a manifest containing git submodules describing the current working commits
 of the seL4 multikernel work.
 
+> [!IMPORTANT]
+> This work is undergoing active development and potentially breaking changes
+> but is at the point where you can experiment with building Microkit systems
+> using the mulitkernel.
+
 ## Running / Building
 
 ```sh
