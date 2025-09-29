@@ -14,6 +14,22 @@ $ ./run-qemu.sh
 $ ./run-odroid.sh
 ```
 
+## Changes for Microkit users
+
+From the perspective of a Microkit user, there should be minimal differences
+when making a Microkit system.
+
+* When `cpu` is specified, the PD will be assigned to the kernel running on that
+  core. For example, a PD with `cpu=1` means that it will run on the 2nd core.
+* As a consequence of multikernels, parent PDs cannot have children across cores
+  and PPcs cannot happen betweeen PDs on different cores.
+* The multikernel configuration requires a separate board build, e.g the `odroidc4`
+  multikernel configuration is called `odroidc4_multikernel`. To add a new multikernel
+  board configuration for a different platform, add the following two kernel configuration options:
+    * `KernelEnableMultikernelSupport`
+    * `KernelMaxNumNodes`
+  Also add the number of multikernels required as part of the `BoardInfo`, e.g `multikernels=2`.
+
 ## Working Configurations
 
 - Currently, only the debug build of the kernel runs. The release version
@@ -183,7 +199,6 @@ $ ./run-odroid.sh
 
         <details>
             <summary>log output</summary>
-
             ```
             LDR|INFO: Flags:                0x0000000000000001
                          seL4 configured as hypervisor
@@ -365,7 +380,6 @@ $ ./run-odroid.sh
 
         <details>
             <summary>log output</summary>
-
             ```
             LDR|INFO: Flags:                0x0000000000000001
                          seL4 configured as hypervisor

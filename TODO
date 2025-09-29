@@ -18,3 +18,5 @@
 - decide what RAM each kernel uses outside of built_system, instead of inside it
 
 - crashes when endpoints cross-core
+
+- If there are no PDs on a particular mulitkernel, Microkit tool will crash...
