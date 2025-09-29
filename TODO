@@ -1,10 +1,13 @@
 - need a way to ensure that only one kernel can modify GIC registers (for setting target IDs, basically)
   -> at the moment we just hardcode init_irqs() to only initialise only core 1...
 
-- shared memory currently makes copy of all the buffers on every core 
-  and so isn't shared
-  only create the buffers necessary on each
-
-- timer sddf example broken? null caps?
-
 - zero out memory before using it
+  -> for cross-core memory that is device memory seL4 doesnt zero it out
+  -> a lot of our sDDF examples do not zero memory, as they assume seL4 has zeroed it
+  -> this breaks a lot of our queues.
+
+- weird bug where allocationst at the top end of memory are broken (NORMAL, not DEVICE)
+
+- need to make the size of the allocations not fixed
+
+- code cleanup needs to be done and lots of debug prints happen.
