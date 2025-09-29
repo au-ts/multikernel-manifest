@@ -27,6 +27,7 @@ $ ./run-odroid.sh
 
         <details>
             <summary>log output</summary>
+
             ```
             LDR|INFO: Flags:                0x0000000000000001
                          seL4 configured as hypervisor
@@ -182,6 +183,7 @@ $ ./run-odroid.sh
 
         <details>
             <summary>log output</summary>
+
             ```
             LDR|INFO: Flags:                0x0000000000000001
                          seL4 configured as hypervisor
@@ -363,6 +365,7 @@ $ ./run-odroid.sh
 
         <details>
             <summary>log output</summary>
+
             ```
             LDR|INFO: Flags:                0x0000000000000001
                          seL4 configured as hypervisor
