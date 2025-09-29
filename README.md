@@ -7,6 +7,8 @@ of the seL4 multikernel work.
 > This work is undergoing active development and potentially breaking changes
 > but is at the point where you can experiment with building Microkit systems
 > using the mulitkernel.
+> It is intended to have this work upstreamed but this is unlikely to happen in
+> the near future.
 
 ## Running / Building
 
