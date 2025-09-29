@@ -204,6 +204,7 @@ when making a Microkit system.
 
         <details>
             <summary>log output</summary>
+
             ```
             LDR|INFO: Flags:                0x0000000000000001
                          seL4 configured as hypervisor
@@ -385,6 +386,7 @@ when making a Microkit system.
 
         <details>
             <summary>log output</summary>
+
             ```
             LDR|INFO: Flags:                0x0000000000000001
                          seL4 configured as hypervisor
