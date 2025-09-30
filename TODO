@@ -12,12 +12,9 @@
 
 - code cleanup needs to be done and lots of debug prints happen.
 
-- need to reserve memory of other kernels for every kernel
-  (and other kernel's normal memory)
-
-- decide what RAM each kernel uses outside of built_system, instead of inside it
-
 - Remove debug printing from tool invocation
   - Or at least print out multikernel info in a structured way, it might make sense
     to have some printing still since we are still experimenting.
 
+- handle non-contiguous physical memory (e.g. for the odroid) in the tool's
+  assignment of what memory to use for each core.
