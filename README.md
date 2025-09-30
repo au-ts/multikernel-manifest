@@ -556,8 +556,14 @@ when making a Microkit system.
 
 See the [TODO](./TODO) file.
 
+## Code changes
 
-## seL4 Changes
+This repository simply pins the known working versions of seL4/Microkit for
+multikernel support that are based on these branches:
+* seL4 - [https://github.com/au-ts/seL4/tree/multikernel](https://github.com/au-ts/seL4/tree/multikernel)
+* Microkit - [https://github.com/au-ts/microkit/tree/multikernel](https://github.com/au-ts/microkit/tree/multikernel)
+
+### seL4 Changes
 
 1.  The kernel uses a fixed virtual memory address on AArch64, rather than
     an address based on the physical memory used that is located within the
@@ -572,7 +578,7 @@ See the [TODO](./TODO) file.
     and passed in registers.
 
 
-## microkit changes
+### microkit changes
 
 -   The tool learns about a new parameter, "cpu", to the protection domain
     that tells it what CPU to place a protection domain on.
