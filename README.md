@@ -43,7 +43,8 @@ when making a Microkit system.
     which is shared across cores. seL4 either needs a way to partition which IRQs
     are used on each core, or some way to ensure that the values are consistent.
 
-    Currently we just trust the userspace to not configure IRQs from multiple cores.
+    Currently all IRQs other than SGIs go to core 0, and so drivers which use IRQs
+    must live on core 0.
 
 2.  What happens when we need more cross-core notifications than there are SGIs?
 
