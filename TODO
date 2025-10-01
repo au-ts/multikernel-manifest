@@ -8,8 +8,6 @@
 
 - weird bug where allocationst at the top end of memory are broken (NORMAL, not DEVICE)
 
-- need to make the size of the allocations not fixed
-
 - code cleanup needs to be done and lots of debug prints happen.
 
 - Remove debug printing from tool invocation
