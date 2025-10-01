@@ -37,6 +37,16 @@ when making a Microkit system.
     * `KernelMaxNumNodes`
   Also add the number of multikernels required as part of the `BoardInfo`, e.g `multikernels=2`.
 
+## Open Problems
+
+1.  How best to handle shared hardware resources, e.g. the GIC distributor registers
+    which is shared across cores. seL4 either needs a way to partition which IRQs
+    are used on each core, or some way to ensure that the values are consistent.
+
+    Currently we just trust the userspace to not configure IRQs from multiple cores.
+
+2.  What happens when we need more cross-core notifications than there are SGIs?
+
 ## Working Configurations
 
 - Currently, only the debug build of the kernel runs. The release version
