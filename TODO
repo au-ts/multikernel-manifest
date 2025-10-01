@@ -1,11 +1,6 @@
 - need a way to ensure that only one kernel can modify GIC registers (for setting target IDs, basically)
   -> at the moment we just hardcode init_irqs() to only initialise only core 1...
 
-- zero out memory before using it
-  -> for cross-core memory that is device memory seL4 doesnt zero it out
-  -> a lot of our sDDF examples do not zero memory, as they assume seL4 has zeroed it
-  -> this breaks a lot of our queues.
-
 - weird bug where allocationst at the top end of memory are broken (NORMAL, not DEVICE)
 
 - code cleanup needs to be done and lots of debug prints happen.
@@ -16,3 +11,12 @@
 
 - handle non-contiguous physical memory (e.g. for the odroid) in the tool's
   assignment of what memory to use for each core.
+
+- "shared" memory that is passed to the kernel by the loader as device memory
+  is not zeroed by the kernel, which means if it is reused in a more dynamic system
+  then we get information leaks. at the moment the loader zeroes it out, which
+  it might not be on system boot.
+
+  maybe we need a third type that the kernel can zero?
+
+  see commit: b5dce56b03e5552b734dba1e71766bf14cb651b3 in microkit
