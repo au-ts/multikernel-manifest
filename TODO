@@ -1,6 +1,3 @@
-- need a way to ensure that only one kernel can modify GIC registers (for setting target IDs, basically)
-  -> at the moment we just hardcode init_irqs() to only initialise only core 1...
-
 - weird bug where allocationst at the top end of memory are broken (NORMAL, not DEVICE)
 
 - code cleanup needs to be done and lots of debug prints happen.

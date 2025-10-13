@@ -39,14 +39,7 @@ when making a Microkit system.
 
 ## Open Problems
 
-1.  How best to handle shared hardware resources, e.g. the GIC distributor registers
-    which is shared across cores. seL4 either needs a way to partition which IRQs
-    are used on each core, or some way to ensure that the values are consistent.
-
-    Currently all IRQs other than SGIs go to core 0, and so drivers which use IRQs
-    must live on core 0.
-
-2.  What happens when we need more cross-core notifications than there are SGIs?
+1.  What happens when we need more cross-core notifications than there are SGIs?
 
 ## Working Configurations
 
@@ -583,10 +576,33 @@ multikernel support that are based on these branches:
 2.  The GIC is no longer initialised in the kernel; it is assumed initialised
     by the loader.
 
+    NOTE: This can probably be changed if we enforce that kernel 0 boots first.
+
 3.  The kernel boot protocol has changed so that reserved regions, physical memory (RAM),
     the root task regions, and the kernel physical region are passed via a
     "Kernel BootInfo" page by the loader, instead of a mix of generated-at-compile-time
     and passed in registers.
+
+4.  Previously, an "Open Question" was:
+
+    >    How best to handle shared hardware resources, e.g. the GIC distributor registers
+    >    which is shared across cores. seL4 either needs a way to partition which IRQs
+    >    are used on each core, or some way to ensure that the values are consistent.
+    >
+    >    Currently all IRQs other than SGIs go to core 0, and so drivers which use IRQs
+    >    must live on core 0.
+
+    A solution, which is currently implemented, is that the kernel only allows
+    for a user to call a new API, `IRQControl::SetTargetCore` if the current
+    target of an IRQ is their core. (On first boot the loader sets all IRQs
+    to target core 0).
+
+    However, after speaking to our verification people, this kind of behaviour
+    significantly complicates the non-interference reasoning, so it is likely
+    that this will be reimplemented to allow only a certain designated "primary"
+    core to perform these modifications.
+
+    See also gic-notes.md.
 
 
 ### microkit changes
