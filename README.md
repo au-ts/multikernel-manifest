@@ -48,6 +48,10 @@ when making a Microkit system.
 
 - QEMU and OdroidC4 are the development platforms.
 
+- GICv3 is currently unsupported; there are no active blockers for this aside
+  from not having spent the (relatively minimal) amount of effort to adjust
+  seL4.
+
 - There are 3 new microkit examples:
 
     - 'multikernel': which sends a few cross-core notifications.
