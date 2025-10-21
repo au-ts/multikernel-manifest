@@ -17,3 +17,6 @@
   maybe we need a third type that the kernel can zero?
 
   see commit: b5dce56b03e5552b734dba1e71766bf14cb651b3 in microkit
+
+- (internal? maybe?) kernel benchmark per-pd utilisation doesn't
+  seem to work on multikernel
