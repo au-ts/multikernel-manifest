@@ -46,171 +46,12 @@ when making a Microkit system.
 - Currently, only the debug build of the kernel runs. The release version
   complains about various warnings and unused variables.
 
-- QEMU and OdroidC4 are the development platforms.
-
-- GICv3 is currently unsupported; there are no active blockers for this aside
-  from not having spent the (relatively minimal) amount of effort to adjust
-  seL4.
+- QEMU, OdroidC4, and MaaXboard are the development platforms.
+  Note that the code sometimes triggers bugs in QEMU that cause it to lock up.
 
 - There are 3 new microkit examples:
 
     - 'multikernel': which sends a few cross-core notifications.
-
-        <details>
-            <summary>log output</summary>
-
-            ```
-            LDR|INFO: Flags:                0x0000000000000001
-                         seL4 configured as hypervisor
-            LDR|INFO: Kernel: 0x0000000000000000
-            LDR|INFO: Kernel: 0x0000000000000001
-            LDR|INFO: region: 0x00000000   addr: 0x0000000060000000   size: 0x0000000000246000   offset: 0x0000000000000000   type: 0x0000000000000001
-            LDR|INFO: region: 0x00000001   addr: 0x0000000061000000   size: 0x0000000000246000   offset: 0x0000000000246000   type: 0x0000000000000001
-            LDR|INFO: region: 0x00000002   addr: 0x000000006024a000   size: 0x0000000000009970   offset: 0x000000000048c000   type: 0x0000000000000001
-            LDR|INFO: region: 0x00000003   addr: 0x000000006124a000   size: 0x0000000000009970   offset: 0x0000000000495970   type: 0x0000000000000001
-            LDR|INFO: region: 0x00000004   addr: 0x0000000060246000   size: 0x0000000000001080   offset: 0x000000000049f2e0   type: 0x0000000000000001
-            LDR|INFO: region: 0x00000005   addr: 0x0000000060248000   size: 0x00000000000008c0   offset: 0x00000000004a0360   type: 0x0000000000000001
-            LDR|INFO: region: 0x00000006   addr: 0x0000000060249000   size: 0x0000000000000090   offset: 0x00000000004a0c20   type: 0x0000000000000001
-            LDR|INFO: region: 0x00000007   addr: 0x0000000061246000   size: 0x0000000000001080   offset: 0x00000000004a0cb0   type: 0x0000000000000001
-            LDR|INFO: region: 0x00000008   addr: 0x0000000061248000   size: 0x0000000000000950   offset: 0x00000000004a1d30   type: 0x0000000000000001
-            LDR|INFO: region: 0x00000009   addr: 0x0000000061249000   size: 0x0000000000000090   offset: 0x00000000004a2680   type: 0x0000000000000001
-            LDR|INFO: copying region 0x00000000
-            LDR|INFO: copying region 0x00000001
-            LDR|INFO: copying region 0x00000002
-            LDR|INFO: copying region 0x00000003
-            LDR|INFO: copying region 0x00000004
-            LDR|INFO: copying region 0x00000005
-            LDR|INFO: copying region 0x00000006
-            LDR|INFO: copying region 0x00000007
-            LDR|INFO: copying region 0x00000008
-            LDR|INFO: copying region 0x00000009
-            LDR|INFO: Configuring GICv2 for ARM
-            LDR|INFO: # of multikernels is 2
-            LDR|INFO: CurrentEL=EL2
-            LDR|INFO: Resetting CNTVOFF
-            LDR|INFO: Boot CPU ID (0)
-            LDR|INFO: Starting other CPUs (0x00000001)
-            LDR|INFO: CurrentEL=EL2
-            LDR|INFO: Resetting CNTVOFF
-            LDR|INFO: secondary (CPU 0x00000001) has MPIDR_EL1: 0x0000000080000001
-            LDR|INFO: enabling MMU (CPU 0x00000001)
-            LDR|INFO: jumping to kernel (CPU 0x00000001)
-            LDR|INFO: enabling self MMU
-            LDR|INFO: jumping to first kernel
-            LDR|INFO: Kernel starting: 0
-                    has entry point: 0x000000ffff000000
-                    has kernel_boot_info_p: 0x0000000070013030
-            hi
-            kernel boot info addr: 0x70013030
-            root task v_entry: 0x8a000000
-            num_kernel_regions: 1
-            num_ram_regions: 1
-            num_root_task_regions: 1
-            num_reserved_regions: 1
-            kernel_regions addr: 0x70013048
-            ram_regions addr: 0x70013058
-            root_task_regions addr: 0x70013068
-            reserved_regions addr: 0x70013088
-            end of kernel boot info addr: 0x70013098
-            kernel_regions[0].base = 0x60000000
-            kernel_regions[0].end = 0x0
-            ram_regions[0].base = 0x60000000
-            ram_regions[0].end = 0x61000000
-            root_task_regions[0].paddr_base = 0x6024a000
-            root_task_regions[0].paddr_end = 0x60254000
-            root_task_regions[0].vaddr_base = 0x8a000000
-            reserved_regions[0].base = 0x60246000
-            reserved_regions[0].end = 0x6024a000
-            Bootstrapping kernel
-            available phys memory regions: 1
-              [60000000..61000000)
-            reserved phys memory regions: 3
-              [60000000..60246000)
-              [60246000..6024a000)
-              [6024a000..60254000)
-            MPIDR_EL1: 80000000
-            MPIDR_EL1:U: multiprocessor
-            MPIDR_EL1:MT: no SMT
-            MPIDR_EL1:Aff0: 0
-            MPIDR_EL1:Aff1: 0
-            MPIDR_EL1:Aff2: 0
-            MPIDR_EL1:Aff3: 0
-            Booting all finished, dropped to user space
-            MON|INFO: Microkit Bootstrap
-            MON|INFO: bootinfo untyped list matches expected list
-            current node: 0x0000000000000000
-            num nodes: 0x0000000000000002
-            bootinfo untyped.end: 0x0000000000000059
-            MON|INFO: bootinfo untyped list matches expected list
-            MON|INFO: Number of bootstrap invocations: 0x00000009
-            MON|INFO: Number of system invocations:    0x0000003e
-            MON|INFO: completed bootstrap invocations
-            MON|INFO: completed system invocations
-            core0: hello, world (from core 0)
-            core0: shared_v: 50331648
-            core0: shared_p: 3221221376
-            core0: shared value: 0
-            LDR|INFO: Kernel starting: 1
-                    has entry point: 0x000000ffff000000
-                    has kernel_boot_info_p: 0x0000000070014030
-            hi
-            kernel boot info addr: 0x70014030
-            root task v_entry: 0x8a000000
-            num_kernel_regions: 1
-            num_ram_regions: 1
-            num_root_task_regions: 1
-            num_reserved_regions: 1
-            kernel_regions addr: 0x70014048
-            ram_regions addr: 0x70014058
-            root_task_regions addr: 0x70014068
-            reserved_regions addr: 0x70014088
-            end of kernel boot info addr: 0x70014098
-            kernel_regions[0].base = 0x61000000
-            kernel_regions[0].end = 0x0
-            ram_regions[0].base = 0x61000000
-            ram_regions[0].end = 0x62000000
-            root_task_regions[0].paddr_base = 0x6124a000
-            root_task_regions[0].paddr_end = 0x61254000
-            root_task_regions[0].vaddr_base = 0x8a000000
-            reserved_regions[0].base = 0x61246000
-            reserved_regions[0].end = 0x6124a000
-            Bootstrapping kernel
-            available phys memory regions: 1
-              [61000000..62000000)
-            reserved phys memory regions: 3
-              [61000000..61246000)
-              [61246000..6124a000)
-              [6124a000..61254000)
-            MPIDR_EL1: 80000001
-            MPIDR_EL1:U: multiprocessor
-            MPIDR_EL1:MT: no SMT
-            MPIDR_EL1:Aff0: 1
-            MPIDR_EL1:Aff1: 0
-            MPIDR_EL1:Aff2: 0
-            MPIDR_EL1:Aff3: 0
-            Booting all finished, dropped to user space
-            MON|INFO: Microkit Bootstrap
-            MON|INFO: bootinfo untyped list matches expected list
-            current node: 0x0000000000000001
-            num nodes: 0x0000000000000002
-            bootinfo untyped.end: 0x0000000000000059
-            MON|INFO: bootinfo untyped list matches expected list
-            MON|INFO: Number of bootstrap invocations: 0x00000009
-            MON|INFO: Number of system invocations:    0x0000003e
-            MON|INFO: completed bootstrap invocations
-            MON|INFO: completed system invocations
-            core1: hello, world (from core 1)
-            core1: shared_v: 50331648
-            core1: shared_p: 3221221376
-            core1: shared value: 0
-            core1: new shared value: 128
-            core0: notified: 0 (cross core)
-            core0: shared value: 128
-            ```
-        </details>
-
-
-    - 'multikernel_memory': which sends cross-core notifications and writes/reads from shared memory
 
         <details>
             <summary>log output</summary>
@@ -391,8 +232,166 @@ when making a Microkit system.
         </details>
 
 
-    - 'multikernel_timer': this only works on Odroid; it implements a timer driver and sends notifications
-                           and data cross-core to a client.
+    - 'multikernel_memory': which sends cross-core notifications and writes/reads from shared memory
+
+        <details>
+            <summary>log output</summary>
+
+            ```
+            LDR|INFO: Flags:                0x0000000000000001
+                         seL4 configured as hypervisor
+            LDR|INFO: Kernel: 0x0000000000000000
+            LDR|INFO: Kernel: 0x0000000000000001
+            LDR|INFO: region: 0x00000000   addr: 0x0000000060000000   size: 0x0000000000246000   offset: 0x0000000000000000   type: 0x0000000000000001
+            LDR|INFO: region: 0x00000001   addr: 0x0000000061000000   size: 0x0000000000246000   offset: 0x0000000000246000   type: 0x0000000000000001
+            LDR|INFO: region: 0x00000002   addr: 0x000000006024a000   size: 0x0000000000009970   offset: 0x000000000048c000   type: 0x0000000000000001
+            LDR|INFO: region: 0x00000003   addr: 0x000000006124a000   size: 0x0000000000009970   offset: 0x0000000000495970   type: 0x0000000000000001
+            LDR|INFO: region: 0x00000004   addr: 0x0000000060246000   size: 0x0000000000001080   offset: 0x000000000049f2e0   type: 0x0000000000000001
+            LDR|INFO: region: 0x00000005   addr: 0x0000000060248000   size: 0x00000000000008c0   offset: 0x00000000004a0360   type: 0x0000000000000001
+            LDR|INFO: region: 0x00000006   addr: 0x0000000060249000   size: 0x0000000000000090   offset: 0x00000000004a0c20   type: 0x0000000000000001
+            LDR|INFO: region: 0x00000007   addr: 0x0000000061246000   size: 0x0000000000001080   offset: 0x00000000004a0cb0   type: 0x0000000000000001
+            LDR|INFO: region: 0x00000008   addr: 0x0000000061248000   size: 0x0000000000000950   offset: 0x00000000004a1d30   type: 0x0000000000000001
+            LDR|INFO: region: 0x00000009   addr: 0x0000000061249000   size: 0x0000000000000090   offset: 0x00000000004a2680   type: 0x0000000000000001
+            LDR|INFO: copying region 0x00000000
+            LDR|INFO: copying region 0x00000001
+            LDR|INFO: copying region 0x00000002
+            LDR|INFO: copying region 0x00000003
+            LDR|INFO: copying region 0x00000004
+            LDR|INFO: copying region 0x00000005
+            LDR|INFO: copying region 0x00000006
+            LDR|INFO: copying region 0x00000007
+            LDR|INFO: copying region 0x00000008
+            LDR|INFO: copying region 0x00000009
+            LDR|INFO: Configuring GICv2 for ARM
+            LDR|INFO: # of multikernels is 2
+            LDR|INFO: CurrentEL=EL2
+            LDR|INFO: Resetting CNTVOFF
+            LDR|INFO: Boot CPU ID (0)
+            LDR|INFO: Starting other CPUs (0x00000001)
+            LDR|INFO: CurrentEL=EL2
+            LDR|INFO: Resetting CNTVOFF
+            LDR|INFO: secondary (CPU 0x00000001) has MPIDR_EL1: 0x0000000080000001
+            LDR|INFO: enabling MMU (CPU 0x00000001)
+            LDR|INFO: jumping to kernel (CPU 0x00000001)
+            LDR|INFO: enabling self MMU
+            LDR|INFO: jumping to first kernel
+            LDR|INFO: Kernel starting: 0
+                    has entry point: 0x000000ffff000000
+                    has kernel_boot_info_p: 0x0000000070013030
+            hi
+            kernel boot info addr: 0x70013030
+            root task v_entry: 0x8a000000
+            num_kernel_regions: 1
+            num_ram_regions: 1
+            num_root_task_regions: 1
+            num_reserved_regions: 1
+            kernel_regions addr: 0x70013048
+            ram_regions addr: 0x70013058
+            root_task_regions addr: 0x70013068
+            reserved_regions addr: 0x70013088
+            end of kernel boot info addr: 0x70013098
+            kernel_regions[0].base = 0x60000000
+            kernel_regions[0].end = 0x0
+            ram_regions[0].base = 0x60000000
+            ram_regions[0].end = 0x61000000
+            root_task_regions[0].paddr_base = 0x6024a000
+            root_task_regions[0].paddr_end = 0x60254000
+            root_task_regions[0].vaddr_base = 0x8a000000
+            reserved_regions[0].base = 0x60246000
+            reserved_regions[0].end = 0x6024a000
+            Bootstrapping kernel
+            available phys memory regions: 1
+              [60000000..61000000)
+            reserved phys memory regions: 3
+              [60000000..60246000)
+              [60246000..6024a000)
+              [6024a000..60254000)
+            MPIDR_EL1: 80000000
+            MPIDR_EL1:U: multiprocessor
+            MPIDR_EL1:MT: no SMT
+            MPIDR_EL1:Aff0: 0
+            MPIDR_EL1:Aff1: 0
+            MPIDR_EL1:Aff2: 0
+            MPIDR_EL1:Aff3: 0
+            Booting all finished, dropped to user space
+            MON|INFO: Microkit Bootstrap
+            MON|INFO: bootinfo untyped list matches expected list
+            current node: 0x0000000000000000
+            num nodes: 0x0000000000000002
+            bootinfo untyped.end: 0x0000000000000059
+            MON|INFO: bootinfo untyped list matches expected list
+            MON|INFO: Number of bootstrap invocations: 0x00000009
+            MON|INFO: Number of system invocations:    0x0000003e
+            MON|INFO: completed bootstrap invocations
+            MON|INFO: completed system invocations
+            core0: hello, world (from core 0)
+            core0: shared_v: 50331648
+            core0: shared_p: 3221221376
+            core0: shared value: 0
+            LDR|INFO: Kernel starting: 1
+                    has entry point: 0x000000ffff000000
+                    has kernel_boot_info_p: 0x0000000070014030
+            hi
+            kernel boot info addr: 0x70014030
+            root task v_entry: 0x8a000000
+            num_kernel_regions: 1
+            num_ram_regions: 1
+            num_root_task_regions: 1
+            num_reserved_regions: 1
+            kernel_regions addr: 0x70014048
+            ram_regions addr: 0x70014058
+            root_task_regions addr: 0x70014068
+            reserved_regions addr: 0x70014088
+            end of kernel boot info addr: 0x70014098
+            kernel_regions[0].base = 0x61000000
+            kernel_regions[0].end = 0x0
+            ram_regions[0].base = 0x61000000
+            ram_regions[0].end = 0x62000000
+            root_task_regions[0].paddr_base = 0x6124a000
+            root_task_regions[0].paddr_end = 0x61254000
+            root_task_regions[0].vaddr_base = 0x8a000000
+            reserved_regions[0].base = 0x61246000
+            reserved_regions[0].end = 0x6124a000
+            Bootstrapping kernel
+            available phys memory regions: 1
+              [61000000..62000000)
+            reserved phys memory regions: 3
+              [61000000..61246000)
+              [61246000..6124a000)
+              [6124a000..61254000)
+            MPIDR_EL1: 80000001
+            MPIDR_EL1:U: multiprocessor
+            MPIDR_EL1:MT: no SMT
+            MPIDR_EL1:Aff0: 1
+            MPIDR_EL1:Aff1: 0
+            MPIDR_EL1:Aff2: 0
+            MPIDR_EL1:Aff3: 0
+            Booting all finished, dropped to user space
+            MON|INFO: Microkit Bootstrap
+            MON|INFO: bootinfo untyped list matches expected list
+            current node: 0x0000000000000001
+            num nodes: 0x0000000000000002
+            bootinfo untyped.end: 0x0000000000000059
+            MON|INFO: bootinfo untyped list matches expected list
+            MON|INFO: Number of bootstrap invocations: 0x00000009
+            MON|INFO: Number of system invocations:    0x0000003e
+            MON|INFO: completed bootstrap invocations
+            MON|INFO: completed system invocations
+            core1: hello, world (from core 1)
+            core1: shared_v: 50331648
+            core1: shared_p: 3221221376
+            core1: shared value: 0
+            core1: new shared value: 128
+            core0: notified: 0 (cross core)
+            core0: shared value: 128
+
+            ```
+        </details>
+
+
+    - 'multikernel_timer': this only works on Odroid/MaaxBoard; it implements
+                           a timer driver and sends notifications and data
+                           cross-core to a client.
 
         <details>
             <summary>log output</summary>
