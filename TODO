@@ -6,9 +6,6 @@
   - Or at least print out multikernel info in a structured way, it might make sense
     to have some printing still since we are still experimenting.
 
-- handle non-contiguous physical memory (e.g. for the odroid) in the tool's
-  assignment of what memory to use for each core.
-
 - "shared" memory that is passed to the kernel by the loader as device memory
   is not zeroed by the kernel, which means if it is reused in a more dynamic system
   then we get information leaks. at the moment the loader zeroes it out, which

@@ -19,6 +19,8 @@ $ cd multikernel-manifest
 $ ./run-qemu.sh
 # on odroid (if you are at Trustworthy Systems and can use the Machine Queue)
 $ ./run-odroid.sh
+# on maaxboard (if you are at Trustworthy Systems and can use the Machine Queue)
+$ ./run-maaxboard.sh
 ```
 
 ## Changes for Microkit users
@@ -42,9 +44,6 @@ when making a Microkit system.
 1.  What happens when we need more cross-core notifications than there are SGIs?
 
 ## Working Configurations
-
-- Currently, only the debug build of the kernel runs. The release version
-  complains about various warnings and unused variables.
 
 - QEMU, OdroidC4, and MaaXboard are the development platforms.
   Note that the code sometimes triggers bugs in QEMU that cause it to lock up.
